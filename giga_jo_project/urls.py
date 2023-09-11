@@ -23,5 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('feed/', include("feed.urls")),  # feed 앱과 연결
     path('', include('user.urls')),
-    path('feed/', include("feed.urls")),  # feed앱과 연결
+    # path('feed/', include("feed.urls")),  # feed앱과 연결
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
