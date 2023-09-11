@@ -6,6 +6,18 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Feed
 
 
+def index(request):
+    if request.method == "GET":
+        feeds = Feed.objects.all()  # read
+
+        context = {
+            "feeds": feeds
+        }
+        return render(request, "feed/index.html", context)
+    else:
+        return HttpResponse("타당하지않은", status=405)
+
+
 # Create your views here.
 def create(request):
     if request.method == "POST":
