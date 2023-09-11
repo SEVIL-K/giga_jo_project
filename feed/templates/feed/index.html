@@ -13,8 +13,16 @@
             <button>피드 작성하기</button>
         </a>
     </div>
+    <ul>
+        {% for feed in feeds %}
+        <li>
+            <a href="/feed/read/{{feed.id}}">
+                {{ feed.title }}
 
-
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
 </body>
 
 </html>
