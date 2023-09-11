@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="text-align: center; font-weight: bold; margin-top: 50px;">
+    <img src="https://visitoakgroveky.com/wp-content/uploads/2018/10/blog-header-background.jpg" width="950"
+        height="333">
+    <h2 style="margin-top: 12px;">PROFILE</h1>
+</div>
+<hr style="width: 960px; margin-left: 23.2%;">
+<div style="display: flex; text-align: center; margin: 20px 0px 0px 420px;">
+    <div>
+        <h2 style="margin-left: -60px;">ABOUT ME</h2>
+        <hr style="margin-left: 0px; width: 45px; height: 10px; background-color: black;">
+        <div>
+            <img src="{{ user.image.url }}" style="width: 220px; height: 200px; margin-top: 20px;">
+            <h4
+                style="color: gray; text-align: left; font: var(--font_8); font-weight: bold; font-size: larger;margin-bottom: 5px; margin-top: 15px;">
+                {{ user.nickname }}</h4>
+            <h5 style="color: gray; text-align: left; font: var(--font_8); margin-top: 0px;">@{{ user.username }}</h5>
+        </div>
+    </div>
+    <div style="margin-left: 400px;">
+        <h2 style="margin-left: -130px;">EDIT PROFILE</h2>
+        <hr style="margin-left: -20px; width: 45px; height: 10px; background-color: rgb(4, 0, 0);">
+        <div>
+            <form action="/mypage/update{{ user.id }}" method="post" enctype="multipart/form-data">
+                <div class="wave-group" style="margin-top: 20px; margin-left: -20px;">
+                    <input required="" type="text" class="input">
+                    <span class="bar"></span>
+                    <label for="username" class="label">
+                      <span class="label-char" style="--index: 0">아</span>
+                      <span class="label-char" style="--index: 1">이</span>
+                      <span class="label-char" style="--index: 2">디</span>
+                    </label>
+                </div>
+                <div class="wave-group" style="margin-top: 20px; margin-left: -20px;">
+                    <input required="" type="text" class="input">
+                    <span class="bar"></span>
+                    <label for="nickname" class="label">
+                      <span class="label-char" style="--index: 0">닉</span>
+                      <span class="label-char" style="--index: 1">네</span>
+                      <span class="label-char" style="--index: 2">임</span>
+                    </label>
+                </div>
+                <div class="wave-group" style="margin-top: 20px; margin-left: -20px;">
+                    <input required="" type="text" class="input">
+                    <span class="bar"></span>
+                    <label for="email" class="label">
+                      <span class="label-char" style="--index: 0">이</span>
+                      <span class="label-char" style="--index: 1">메</span>
+                      <span class="label-char" style="--index: 2">일</span>
+                    </label>
+                </div>
+                <div class="wave-group" style="margin-top: 20px; margin-left: -20px;">
+                    <input required="" type="password" class="input">
+                    <span class="bar"></span>
+                    <label for="password1" class="label">
+                      <span class="label-char" style="--index: 0">비</span>
+                      <span class="label-char" style="--index: 1">밀</span>
+                      <span class="label-char" style="--index: 2">번</span>
+                      <span class="label-char" style="--index: 3">호</span>
+                    </label>
+                </div>
+                <div class="wave-group" style="margin-top: 20px; margin-left: -20px;">
+                    <input required="" type="password" class="input">
+                    <span class="bar"></span>
+                    <label for="password2" class="label">
+                      <span class="label-char" style="--index: 0">비</span>
+                      <span class="label-char" style="--index: 1">밀</span>
+                      <span class="label-char" style="--index: 2">번</span>
+                      <span class="label-char" style="--index: 3">호</span>
+                      <span class="label-char" style="--index: 4">&nbsp;</span>
+                      <span class="label-char" style="--index: 5">확</span>
+                      <span class="label-char" style="--index: 6">인</span>
+                      
+                    </label>
+                </div>
+                <div class="wave-group" style="margin-top: 20px; margin-left: -20px;">
+                    <input required="" type="file" class="input">
+                    <span class="bar"></span>
+                    <label for="image" class="label">
+                    </label>
+                </div>
+                <div class="button-borders" style="margin-top: 25px; margin-left: -17px; margin-bottom: 100px;">
+                    <button type="submit" class="primary-button"> 확인
+                    </button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}
