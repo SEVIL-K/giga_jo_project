@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <h1>{{feed.content}}</h1>
+        <!-- 게시글의 내용 보여주는 페이지 -->
+        <p>생성 시간 : {{feed.created_at}}</p>
+        <p>수정 시간 : {{feed.updated_at}}</p>
+        <!-- <p>{{feed.user.username}}</p> -->
+
+        <!-- {%if request.user == todo.user%} -->
+        <div>
+            <form action="/feed/delete/{{feed.id}}/" method="post">
+                <!-- 삭제하기 버튼은 post라서 form구문을써야함 -->
+                <!-- {%csrf_token%} -->
+                <button>삭제하기</button>
+            </form>
+
+
+            <a href="/feed/update/{{feed.id}}/">
+                <button>수정하기</button>
+            </a>
+        </div>
+        <!-- {%endif%} -->
+
+
+        <a href="/feed/index/">
+            <button>뒤돌아가기</button>
+        </a>
+    </div>
+</body>
+
+</html>

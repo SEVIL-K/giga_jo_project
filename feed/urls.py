@@ -5,7 +5,9 @@ from . import views
 
 
 urlpatterns = [
-    path('index/', views.index, name="index"),  # 게시글 보여주는 url
+    path('index/', views.index, name="index"),  # 피드페이지 urls
     path('create/', views.create, name='create'),  # 게시글 작성 urls
-    # path('update/', views.update, name='update'),
+    path('read/<int:feed_id>/', views.read),
+    path('delete/<int:feed_id>/', views.delete, name='delete'),  # 삭제하기 urls
+    path('update/<int:feed_id>/', views.update, name='update'),
 ]
