@@ -8,10 +8,11 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 # Create your views here.
 
+
 def home(request):
     user = request.user
     if user.is_authenticated:
-        return redirect('feed/index')
+        return redirect('/feedlist/')
     else:
         return redirect('/login')
 
@@ -24,7 +25,7 @@ def signup(request):
         password = request.POST['password']
         UserModel.objects.create_user(
             username=username, nickname=nickname, email=email, password=password)
-        return redirect('/feed/index/')
+        return redirect('/feedlist/')
     elif request.method == 'GET':
         return render(request, 'user/signup.html')
     else:
@@ -39,7 +40,7 @@ def login(request):
         if user is not None:
             print('check')
             auth_login(request, user)
-            return redirect('/feed/index/')
+            return redirect('/feedlist/')
         else:
             return HttpResponse('Invalid auth', status=401)
     elif request.method == 'GET':
@@ -53,7 +54,7 @@ def logout(request):
     user = request.user
     if user.is_authenticated:
         auth_logout(request)
-        return redirect('/feed/index/')
+        return redirect('/feedlist/')
     else:
         return HttpResponse('Invalid request method', status=405)
 

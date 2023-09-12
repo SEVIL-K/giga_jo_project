@@ -72,3 +72,13 @@ def update(request, feed_id):
         return render(request, "feed/update.html", context)
     else:
         return HttpResponse("잘못적음!")
+
+
+def create_comment(request, feed_id):
+    if request.method == "POST":
+        feed_commnet = Feed.objects.get(id=feed_id)
+        # ?.content = request.POST.get('content')
+        # ?.save()
+        return redirect("/feed/read/{}/", feed_id=feed_id)
+    else:
+        return HttpResponse("잘못된 요청")
