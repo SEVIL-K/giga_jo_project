@@ -10,12 +10,11 @@
 <body>
     <div>
         <h1>{{feed.content}}</h1>
-        <!-- 게시글의 내용 보여주는 페이지 -->
         <p>생성 시간 : {{feed.created_at}}</p>
         <p>수정 시간 : {{feed.updated_at}}</p>
-        <!-- <p>{{feed.user.username}}</p> -->
+        <p>{{feed.author}}님</p>
 
-        <!-- {%if request.user == todo.user%} -->
+        {%if request.user == feed.author%}
         <div>
             <form action="/feed/delete/{{feed.id}}/" method="post">
                 <!-- 삭제하기 버튼은 post라서 form구문을써야함 -->
@@ -28,7 +27,7 @@
                 <button>수정하기</button>
             </a>
         </div>
-        <!-- {%endif%} -->
+        {%endif%}
 
 
         <a href="/feedlist/">
