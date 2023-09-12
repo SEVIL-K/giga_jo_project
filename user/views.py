@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, reverse
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from .models import UserModel
 from feed.models import Feed
@@ -37,6 +37,14 @@ def login(request):
             return HttpResponse('Invalid auth', status=401)
     elif request.method == 'GET':
         return render(request, 'user/login.html')
+    else:
+        return HttpResponse('Invalid request method', status=405)
+
+
+def logout(request):
+    if request.method == 'POST':
+        auth_logout(request)
+        return redirect('/feed/index/')
     else:
         return HttpResponse('Invalid request method', status=405)
 
