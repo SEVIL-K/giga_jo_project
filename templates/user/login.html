@@ -26,7 +26,7 @@
   </head>
   <body>
     <div class="container">
-      <h1>로그인</h1>
+      <h1>TIL 블로그</h1>
       <form action="/login/" method="post">
         {% csrf_token %}
         <div class="form-group">
@@ -46,6 +46,7 @@
             class="form-control" />
         </div>
         <div class="btn-signup">
+          <a class="btn btn-default" href="/signup/">회원가입 </a>
           <button type="submit" class="btn btn-default">로그인하기</button>
         </div>
       </form>
