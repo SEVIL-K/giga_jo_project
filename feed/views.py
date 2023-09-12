@@ -24,10 +24,9 @@ def create(request):
         title = request.POST.get("title")
         content = request.POST.get("content")
         author = request.user
-        # Feed.objects.create(title=title, content=content)
         Feed.objects.create(title=title, content=content,
-                            author=author)  # 아직 user기능 열지 않음
-        return redirect("/feed/index")
+                            author=author)
+        return redirect("/feedlist/")
     elif request.method == "GET":
         return render(request, "feed/create.html")
     else:
@@ -49,7 +48,7 @@ def delete(request, feed_id):
         feed = Feed.objects.get(id=feed_id)
         if request.user == feed.author:
             feed.delete()
-            return redirect("/feed/index/")
+            return redirect("/feedlist/")
         else:
             return HttpResponse("권한없음!")
     else:

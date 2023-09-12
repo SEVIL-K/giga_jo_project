@@ -5,7 +5,7 @@ from . import views
 
 
 urlpatterns = [
-    path('index/', views.index, name="index"),  # 피드페이지 urls
+    path('index/', views.index, name="index"),  # 테스트용 피드페이지 urls
     path('create/', views.create, name='create'),  # 게시글 작성 urls
     path('read/<int:feed_id>/', views.read),
     path('delete/<int:feed_id>/', views.delete, name='delete'),  # 삭제하기 urls
