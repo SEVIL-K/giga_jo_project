@@ -8,6 +8,7 @@ class Feed(models.Model):
     class Meta:
         db_table = "feed"
 
+    # user값이 들어온다면 null을 지워줘야함
     author = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     content = models.CharField(max_length=256)
     title = models.CharField(max_length=256, default='')
