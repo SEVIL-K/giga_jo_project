@@ -42,14 +42,16 @@ def read(request, feed_id):
     return render(request, "feed/detail.html", context, )
 
 
+@csrf_exempt
 def delete(request, feed_id):
+
     if request.method == "POST":
         feed = Feed.objects.get(id=feed_id)
-        # if request.user == feed.user:
-        feed.delete()
-        return redirect("/feed/index/")
-        # else:
-        #     return HttpResponse("권한없음!")
+        if request.user == feed.author:
+            feed.delete()
+            return redirect("/feed/index/")
+        else:
+            return HttpResponse("권한없음!")
     else:
         return HttpResponse("잘못적음!")
 
