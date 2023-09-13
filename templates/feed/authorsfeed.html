@@ -14,7 +14,7 @@
     <!-- <a href="/feeds/{{ feed.id }}/">
         <p>{{feed.title}}</p>
     </a> -->
-    <div class="my_card" onclick="location.href='/detail_feed/{{ feed.id }}'" style="border: solid; border-width: 0.7px; margin-top: 20px; margin-right: 21px; cursor: pointer;">
+    <div class="my_card" onclick="location.href='/feed/read/{{ feed.id }}'" style="border: solid; border-width: 0.7px; margin-top: 20px; margin-right: 21px; cursor: pointer;">
     {% if feed.image %}
         <div class="my_card-image">
             <img class="my_card-image" src="{{ feed.image.url }}">
