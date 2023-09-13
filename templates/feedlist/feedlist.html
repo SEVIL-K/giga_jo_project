@@ -12,9 +12,11 @@
   </div>
   {% if request.user.is_authenticated %}
   <div class="profile_card" style="margin-top: -280px; margin-left: 80px;">
-    <div>
-      <img src="{{ request.user.image.url }}" class="img">
-    </div>
+    {% if request.user.image %}
+        <div>
+        <img src="{{ request.user.image.url }}" class="img">
+        </div>
+    {% endif %}
     <div class="textBox">
       <div class="textContent">
         <p class="h1" style="margin-top: 10px;">{{ request.user.nickname }}</p>
