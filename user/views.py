@@ -8,6 +8,13 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 # Create your views here.
 
+def home(request):
+    user = request.user
+    if user.is_authenticated:
+        return redirect('feed/index')
+    else:
+        return redirect('/login')
+
 
 def home(request):
     user = request.user

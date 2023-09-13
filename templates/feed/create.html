@@ -7,7 +7,7 @@
 
 <div style="height: 800px;">
     <div class="container" style="height: 900px;">
-        <form method="POST" action="/feed/create/">
+        <form method="POST" action="/feed/create/" enctype="multipart/form-data">
             <div class="modal" style="margin-left: 30%;">
                 <div class="modal__header">
                     <span class="modal__title">새 피드</span><button class="button2 button2--icon"><svg width="24"
@@ -47,7 +47,7 @@
                     <div class="text">
                         <span>Click to upload image</span>
                     </div>
-                    <input type="file" id="file">
+                    <input type="file" id="file" name="image">
                 </label>
 
                 <div class="modal__footer">
