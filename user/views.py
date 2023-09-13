@@ -25,7 +25,7 @@ def signup(request):
         password = request.POST['password']
         UserModel.objects.create_user(
             username=username, nickname=nickname, email=email, password=password)
-        return redirect('/feedlist/')
+        return redirect('/login/')
     elif request.method == 'GET':
         return render(request, 'user/signup.html')
     else:
@@ -38,7 +38,6 @@ def login(request):
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            print('check')
             auth_login(request, user)
             return redirect('/feedlist/')
         else:
