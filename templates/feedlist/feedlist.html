@@ -28,10 +28,7 @@
   </div>
   
   {% else %}
-  <div>
-    <a href="/login/">로그인</a>
-    <a href="/signup/">회원가입</a>
-  </div>
+
   {% endif %}
   {% if user.is_authenticated %}
   <div style="margin-top: 50px; margin-left: 85px;">
@@ -48,8 +45,8 @@
   
   <div
     style="margin: 200px 0px 50px 410px; display: inline-flex; flex-wrap: wrap; justify-content: flex-start; width: 1000px;">
-    {% for feed in feeds %}
-    <div class="my_card" onclick="location.href='/feed/reed/{{ feed.id }}'"
+    {% for feed in page_obj %}
+    <div class="my_card" onclick="location.href='/feed/read/{{ feed.id }}'"
       style="border: solid; border-width: 0.7px; margin-top: 20px; margin-right: 21px; cursor: pointer;">
       {% if feed.image %}
       <div class="my_card-image">
@@ -58,9 +55,9 @@
       {% endif %}
       <div style="display: flex; flex-direction: row;">
         {% if feed.author.image %}
-            <div style="margin-left: 6px; margin-top: 7px;">
-                <img src="{{ feed.author.image.url }}" class="rounded-circle img-fluid" height='25' width='25'>
-            </div>
+        <div style="margin-left: 6px; margin-top: 7px;">
+          <img src="{{ feed.author.image.url }}" class="rounded-circle img-fluid" height='25' width='25'>
+        </div>
         {% endif %}
         <div class="author" style="margin-left: 10px; margin-top: 5px;">
           By <span class="name">{{ feed.author.username }}</span> <br />{{ feed.created_at|timesince }} ago
