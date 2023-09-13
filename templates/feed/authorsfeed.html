@@ -1,16 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>{{ author.nickname }}님의 page</h1>
-    {% for feed in feeds %}
-    <a href="/feeds/{{ feed.id }}/">
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div style="text-align: center; font-weight: bold; margin-top: 50px; position: relative;;">
+    <img src="https://visitoakgroveky.com/wp-content/uploads/2018/10/blog-header-background.jpg" width="950"
+        height="333">
+</div>
+<div style="position: absolute; margin-top: -21px; margin-left: 36%;width: 500px; height: 50px; border: solid; z-index: 1; background-color: white;">
+    <h3 style="text-align: center; margin-top: 3.2px; letter-spacing : 0.5em;">{{ user.nickname }}'s FEED</h3>
+</div>
+<div style="margin: 30px 0px 0px 414px; display: inline-flex; flex-wrap: wrap; justify-content: flex-start; width: 1000px;">
+{% for feed in feeds %}
+    <!-- <a href="/feeds/{{ feed.id }}/">
         <p>{{feed.title}}</p>
-    </a>
-    {% endfor %}
-</body>
-</html>
+    </a> -->
+    <div class="my_card" onclick="location.href='/detail_feed/{{ my_feed.id }}'" style="border: solid; border-width: 0.7px; margin-top: 20px; margin-right: 21px; cursor: pointer;">
+    {% if feed.image %}
+        <div class="my_card-image">
+            <img class="my_card-image" src="{{ feed.image.url }}">
+        </div>
+    {% endif %}
+        <div style="display: flex; flex-direction: row;">
+            <div style="margin-left: 6px; margin-top: 7px;">
+                <img src="{{ author.image.url }}" class="rounded-circle img-fluid" height='25' width='25'>
+            </div>
+            <div class="author" style="margin-left: 10px; margin-top: 5px;">
+                By <span class="name">{{ author.nickname }}</span> <br />{{ feed.created_at|timesince }}  ago
+            </div>
+        </div>
+        <div class="category">{{ feed.title }}</div>
+        <div class="heading"> {{ feed.content }}</div>
+    </div>
+{% endfor %}
+</div>
+
+<nav aria-label="Page navigation example" style="margin-top: 70px; margin-left: 45%;">
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">prev</a></li>
+        {% endif %}
+        {% for page in paginator.page_range %}
+            <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a></li>
+        {% endif %}
+        </ul>
+</nav>
+
+{% endblock %}
+
+
