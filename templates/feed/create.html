@@ -7,19 +7,17 @@
 
 <div style="height: 800px;">
     <div class="container" style="height: 900px;">
-
-        <div class="modal" style="margin-left: 30%;">
-            <div class="modal__header">
-                <span class="modal__title">새 피드</span><button class="button2 button2--icon"><svg width="24"
-                        viewBox="0 0 24 24" height="24" xmlns="http://www.w3.org/2000/svg">
-                        <path fill="none" d="M0 0h24v24H0V0z"></path>
-                        <path
-                            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z">
-                        </path>
-                    </svg></button>
-            </div>
-            <form action="/feed/create/" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
+        <form method="POST" action="/feed/create/" enctype="multipart/form-data">
+            <div class="modal" style="margin-left: 30%;">
+                <div class="modal__header">
+                    <span class="modal__title">새 피드</span><button class="button2 button2--icon"><svg width="24"
+                            viewBox="0 0 24 24" height="24" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="none" d="M0 0h24v24H0V0z"></path>
+                            <path
+                                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z">
+                            </path>
+                        </svg></button>
+                </div>
                 <div class="modal__body">
                     <div class="input">
                         <label class="input__label" style="font-size: larger;">제목</label>
@@ -49,14 +47,15 @@
                     <div class="text">
                         <span>Click to upload image</span>
                     </div>
-                    <input type="file" id="file">
+                    <input type="file" id="file" name="image">
                 </label>
 
-                <div class="modal__footer" onclick="location.href='/feedlist/'">
-                    <button class="button2 button2--primary">작성 완료</button>
+                <div class="modal__footer">
+                    <button class="button2 button2--primary" type="submit" onclick="location.href='/feedlist/'">작성
+                        완료</button>
                 </div>
-            </form>
-        </div>
+        </form>
     </div>
+</div>
 </div>
 {% endblock %}
