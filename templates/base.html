@@ -21,103 +21,93 @@
 
 
     <style>
-        .custum-file-upload {
-            height: 200px;
-            width: 300px;
-            display: flex;
-            flex-direction: column;
-            align-items: space-between;
-            gap: 20px;
-            cursor: pointer;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed #cacaca;
-            background-color: rgba(255, 255, 255, 1);
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0px 48px 35px -48px rgba(0, 0, 0, 0.1);
+        .orange {
+            color: #ffb876;
         }
 
-        .custum-file-upload .icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .custum-file-upload .icon svg {
-            height: 80px;
-            fill: rgba(75, 85, 99, 1);
-        }
-
-        .custum-file-upload .text {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .custum-file-upload .text span {
-            font-weight: 400;
-            color: rgba(75, 85, 99, 1);
-        }
-
-        .custum-file-upload input {
-            display: none;
-        }
-
-        .button2 {
-            appearance: none;
-            font: inherit;
-            border: none;
-            background: none;
-            cursor: pointer;
-        }
-
-        .container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
-        }
-
-        .modal {
-            z-index: 0;
-            margin-top: 60px;
-            display: flex;
-            flex-direction: column;
-            width: 100%;
+        .form-container {
             max-width: 700px;
-            height: 740px;
-            background-color: #fff;
-            box-shadow: 0 15px 30px 0 rgba(0, 125, 171, 0.15);
-            border-radius: 10px;
+            margin: 30px;
+            background-color: #ffffff;
+            padding: 30px;
+            border: solid;
+            border-color: #83b2ff;
+            border-left: 5px solid #83b2ff;
+            /* clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%); */
         }
 
-        .modal__header {
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid #ddd;
+        .heading {
+            display: block;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .form-container .form .input {
+            color: #303030;
+            width: 100%;
+            background-color: #dbdbdb;
+            border: none;
+            outline: none;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            transition: all 0.2s ease-in-out;
+            border-left: 1px solid transparent;
+        }
+
+        .form-container .form .input:focus {
+            border-left: 5px solid #83b2ff;
+        }
+
+        .form-container .form .textarea {
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            border: none;
+            outline: none;
+            background-color: #cdcdcd;
+            color: #535353;
+            font-weight: bold;
+            resize: none;
+            max-height: 300px;
+            margin-bottom: 20px;
+            border-left: 1px solid transparent;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .form-container .form .textarea:focus {
+            border-left: 5px solid #83b2ff;
+        }
+
+        .form-container .form .button-container {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
+            gap: 10px;
         }
 
-        .modal__body {
-            padding: 1rem 1rem;
+        .form-container .form .button-container .send-button {
+            flex-basis: 70%;
+            background: #5e9cff;
+            padding: 10px;
+            color: #ffffff;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid transparent;
+            transition: all 0.2s ease-in-out;
         }
 
-        .modal__footer {
-            padding: 0 1.5rem 1.5rem;
+        .form-container .form .button-container .send-button:hover {
+            background: transparent;
+            border: 1px solid #69a3ff;
+            color: #69a3ff;
         }
 
-        .modal__title {
-            font-weight: 700;
-            font-size: 1.25rem;
+        .form-container .form .button-container .reset-button-container {
+            filter: drop-shadow(1px 1px 0px #619dff);
+            flex-basis: 30%;
         }
+
 
         .button2 {
             display: inline-flex;
@@ -403,7 +393,7 @@
             padding: 7px;
             display: -webkit-box;
             /* 내용이 너무 길면 1줄만 */
-            -webkit-line-clamp: 6;
+            -webkit-line-clamp: 5;
             -webkit-box-orient: vertical;
             overflow: hidden;
             padding-bottom: 0em;
@@ -644,7 +634,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/myfeed/{{ user.id }}">나의 피드</a>
                     </li>
-                    
+
                     {% else %}
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/login/">로그인</a>

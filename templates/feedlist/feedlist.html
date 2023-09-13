@@ -3,7 +3,7 @@
 {% block title %}피드 상세 페이지{% endblock %}
 
 {% block content %}
-<div style="text-align: center; font-weight: bold; margin-top: 50px; position: relative;;">
+<div style="text-align: center; font-weight: bold; margin-top: 50px; position: relative;">
     <img src="https://visitoakgroveky.com/wp-content/uploads/2018/10/blog-header-background.jpg" width="950" height="333">
   </div>
   <div
@@ -14,7 +14,7 @@
   <div class="profile_card" style="margin-top: -280px; margin-left: 80px;">
     {% if request.user.image %}
         <div>
-        <img src="{{ request.user.image.url }}" class="img">
+            <img src="{{ request.user.image.url }}" class="img">
         </div>
     {% endif %}
     <div class="textBox">
@@ -34,8 +34,8 @@
   </div>
   {% endif %}
   {% if user.is_authenticated %}
-  <div style="margin-top: 50px; margin-left: 85px;">
-    <button type="button" class="button1" onclick="location.href='/feed/create/';">
+  <div style="margin-top: 50px; text-align: center; position:relative;">
+    <button type="button" class="button1" onclick="location.href='/feed/create/';" style="margin-left: 80px;">
       <span class="button__text">피드 작성</span>
       <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2"
           stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg">
@@ -47,8 +47,8 @@
   {% endif %}
   
   <div
-    style="margin: 200px 0px 50px 410px; display: inline-flex; flex-wrap: wrap; justify-content: flex-start; width: 1000px;">
-    {% for feed in feeds %}
+    style="margin: 200px 0px 50px 23%; display: inline-flex; flex-wrap: wrap; justify-content: flex-start; width: 1000px;">
+    {% for feed in page_obj %}
     <div class="my_card" onclick="location.href='/feed/read/{{ feed.id }}'"
       style="border: solid; border-width: 0.7px; margin-top: 20px; margin-right: 21px; cursor: pointer;">
       {% if feed.image %}
