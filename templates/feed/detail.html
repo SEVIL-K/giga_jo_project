@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+{% block title %}피드 상세 페이지{% endblock %}
 
-<body>
+{% block content %}
     <div>
         <h1>{{feed.content}}</h1>
         <p>생성 시간 : {{feed.created_at}}</p>
@@ -34,6 +29,6 @@
             <button>뒤돌아가기</button>
         </a>
     </div>
-</body>
+{% endblock %}
 
 </html>

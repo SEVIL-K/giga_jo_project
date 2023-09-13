@@ -24,8 +24,13 @@ def create(request):
         title = request.POST.get("title")
         content = request.POST.get("content")
         author = request.user
+        try:
+            image = request.FILE['image']
+        except:
+            image = None
+        
         Feed.objects.create(title=title, content=content,
-                            author=author)
+                            author=author, image=image)
         return redirect("/feedlist/")
     elif request.method == "GET":
         return render(request, "feed/create.html")
