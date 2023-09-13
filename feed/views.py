@@ -25,7 +25,7 @@ def create(request):
         content = request.POST.get("content")
         author = request.user
         try:
-            image = request.FILE['image']
+            image = request.FILES['image']
         except:
             image = None
         
