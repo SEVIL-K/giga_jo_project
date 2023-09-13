@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
-from .models import Feed
+from .models import Feed, FeedComment
 
 
 def index(request):
@@ -74,11 +74,24 @@ def update(request, feed_id):
         return HttpResponse("잘못적음!")
 
 
+# 댓글기능 구현중
+@csrf_exempt
 def create_comment(request, feed_id):
     if request.method == "POST":
-        feed_commnet = Feed.objects.get(id=feed_id)
-        # ?.content = request.POST.get('content')
-        # ?.save()
+        content = request.POST.get("content")
+        author = request.user
+        FeedComment.objects.create(content=content,
+                                   author=author, feed_id=feed_id)
         return redirect("/feed/read/{}/", feed_id=feed_id)
+    elif request.method == "GET":
+        return render(request, "feed/create.html")
     else:
-        return HttpResponse("잘못된 요청")
+        return HttpResponse("잘못적음!")
+
+
+def read_comment(request, feed_id):
+    comments = FeedComment.objects.filter(feed_id=feed_id)
+    context = {
+        "comments": comments
+    }
+    return render(request, "feed/detail.html", context, )

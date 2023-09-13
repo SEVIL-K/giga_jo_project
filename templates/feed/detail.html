@@ -1,39 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+{% block title %}피드 상세 페이지{% endblock %}
 
-<body>
-    <div>
-        <h1>{{feed.content}}</h1>
-        <p>생성 시간 : {{feed.created_at}}</p>
-        <p>수정 시간 : {{feed.updated_at}}</p>
-        <p>{{feed.author}}님</p>
 
-        {%if request.user == feed.author%}
-        <div>
-            <form action="/feed/delete/{{feed.id}}/" method="post">
-                <!-- 삭제하기 버튼은 post라서 form구문을써야함 -->
-                <!-- {%csrf_token%} -->
-                <button>삭제하기</button>
+
+
+{% block content %}
+<div style="height: 800px;">
+    <div class="container" style="height: 900px;">
+
+        <div class="modal" style="margin-left: 30%;">
+            <div class="modal__header">
+                <span class="modal__title">피드 상세 페이지</span><button class="button2 button2--icon">
+                    <!-- <svg width="24"
+                        viewBox="0 0 24 24" height="24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="none" d="M0 0h24v24H0V0z"></path>
+                        <path
+                            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z">
+                        </path>
+                    </svg> -->
+                </button>
+                <p><br>작성자 {{feed.author}}님</p>
+            </div>
+            <div class="modal__body">
+                <div class="input">
+                    <label class="input__label" style="font-size: larger;">제목</label>
+                    <p class="input__field input__field--textarea" style="height: 10px;" id="title" name="title">
+                        {{feed.title}}</p>
+                </div>
+                <div class="input">
+                    <label class="input__label" style="font-size: larger;">내용</label>
+                    <p class="input__field input__field--textarea" style="height: 200px;" id="content" name="content">
+                        {{feed.content}}</p>
+                    <!-- <p>{{feed.content}}</p> -->
+
+                </div>
+            </div>
+            <label class="input__label" style="font-size: larger; padding-left:15px">생성 시간 : {{feed.created_at}}</label>
+            <label class="input__label" style="font-size: larger; padding-left:15px">수정 시간 : {{feed.updated_at}}</label>
+
+
+
+
+            {%if request.user == feed.author%}
+            <div>
+                <form action="/feed/delete/{{feed.id}}/" method="post">
+                    <!-- 삭제하기 버튼은 post라서 form구문을써야함 -->
+                    <!-- {%csrf_token%} -->
+                    <button>삭제하기</button>
+                </form>
+
+
+                <a href="/feed/update/{{feed.id}}/">
+                    <button>수정하기</button>
+                </a>
+            </div>
+            {%endif%}
+            <div class="modal__footer" onclick="location.href='/feedlist/'">
+                <button class="button2 button2--primary">뒤돌아가기</button>
+            </div>
+            <!-- 댓글 구현기능중 -->
+            <!-- 실행시 에러가 발생 -->
+            <form action="/feed/read/{{feed.id}}/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal__body">
+                    <div class="input">
+                        <label class="input__label" style="font-size: larger;">댓글</label>
+                        <input class="input__field" type="text" id="title" name="title">
+
+                    </div>
+
+                    <div class="tt-area-write">
+                        <div class="tt-box-thumb"><span class="tt-thumbnail"
+                                style="background-image: url(&quot;https://img1.daumcdn.net/thumb/C88x88/?fname=https%3A%2F%2Ft1.daumcdn.net%2Ftistory_admin%2Fstatic%2Fmanage%2Fimages%2Fr3%2Fdefault_S.png&quot;);"></span>
+                        </div>
+                        <div class="tt-box-write" style="display: flex; justify-content: flex-end;">
+                            <label class="tt-xe-label"><input type="checkbox" name="secret" id="secret"><span
+                                    class="tt_img_area_reply tt-xe-input-helper"></span><span
+                                    class="tt-xe-label-text">비밀글</span></label><button type="submit"
+                                class="tt-btn_register">등록</button>
+                        </div>
+
+
+                    </div>
+
+                </div>
             </form>
-
-
-            <a href="/feed/update/{{feed.id}}/">
-                <button>수정하기</button>
-            </a>
         </div>
-        {%endif%}
-
-
-        <a href="/feedlist/">
-            <button>뒤돌아가기</button>
-        </a>
     </div>
-</body>
-
-</html>
+</div>
+{% endblock %}
