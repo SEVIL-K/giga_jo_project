@@ -10,11 +10,11 @@
     <h3 style="text-align: center; margin-top: 3.2px; letter-spacing : 0.5em;">{{ user.nickname }}'s FEED</h3>
 </div>
 <div style="margin: 30px 0px 0px 414px; display: inline-flex; flex-wrap: wrap; justify-content: flex-start; width: 1000px;">
-{% for feed in feeds %}
+{% for feed in page_obj %}
     <!-- <a href="/feeds/{{ feed.id }}/">
         <p>{{feed.title}}</p>
     </a> -->
-    <div class="my_card" onclick="location.href='/detail_feed/{{ my_feed.id }}'" style="border: solid; border-width: 0.7px; margin-top: 20px; margin-right: 21px; cursor: pointer;">
+    <div class="my_card" onclick="location.href='/detail_feed/{{ feed.id }}'" style="border: solid; border-width: 0.7px; margin-top: 20px; margin-right: 21px; cursor: pointer;">
     {% if feed.image %}
         <div class="my_card-image">
             <img class="my_card-image" src="{{ feed.image.url }}">
@@ -45,7 +45,7 @@
         {% if page_obj.has_next %}
             <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a></li>
         {% endif %}
-        </ul>
+    </ul>
 </nav>
 
 {% endblock %}
