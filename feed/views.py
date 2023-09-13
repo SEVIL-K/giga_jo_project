@@ -3,7 +3,9 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
+from user.models import UserModel
 from .models import Feed
+
 
 
 def index(request):
@@ -87,3 +89,12 @@ def create_comment(request, feed_id):
         return redirect("/feed/read/{}/", feed_id=feed_id)
     else:
         return HttpResponse("잘못된 요청")
+
+
+def authorsfeed(request, author_id):
+    author = UserModel.objects.get(id=author_id)
+    feeds = author.feed_set.all()
+    context = {
+        'author':author, 'feeds':feeds
+    }
+    return render(request, "feed/authorsfeed.html", context)

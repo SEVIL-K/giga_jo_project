@@ -10,4 +10,5 @@ urlpatterns = [
     path('read/<int:feed_id>/', views.read),
     path('delete/<int:feed_id>/', views.delete, name='delete'),  # 삭제하기 urls
     path('update/<int:feed_id>/', views.update, name='update'),
+    path('<int:author_id>/', views.authorsfeed, name='authorsfeed'),
 ]

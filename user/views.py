@@ -15,6 +15,13 @@ def home(request):
     else:
         return redirect('/login')
 
+def home(request):
+    user = request.user
+    if user.is_authenticated:
+        return redirect('feed/index')
+    else:
+        return redirect('/login')
+
 
 def home(request):
     user = request.user
