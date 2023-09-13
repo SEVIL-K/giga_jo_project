@@ -12,7 +12,7 @@ def feedlist(request):
         feeds = Feed.objects.all().order_by('-created_at')
         page = request.GET.get('page')
 
-        paginator = Paginator(feeds, 5)
+        paginator = Paginator(feeds, 6)
 
         try:
             page_obj = paginator.page(page)
