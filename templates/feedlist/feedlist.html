@@ -57,9 +57,11 @@
       </div>
       {% endif %}
       <div style="display: flex; flex-direction: row;">
-        <div style="margin-left: 6px; margin-top: 7px;">
-          <img src="{{ feed.author.image.url }}" class="rounded-circle img-fluid" height='25' width='25'>
-        </div>
+        {% if feed.author.image %}
+            <div style="margin-left: 6px; margin-top: 7px;">
+                <img src="{{ feed.author.image.url }}" class="rounded-circle img-fluid" height='25' width='25'>
+            </div>
+        {% endif %}
         <div class="author" style="margin-left: 10px; margin-top: 5px;">
           By <span class="name">{{ feed.author.username }}</span> <br />{{ feed.created_at|timesince }} ago
         </div>
