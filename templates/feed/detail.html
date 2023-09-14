@@ -4,7 +4,9 @@
 <div style="height: 640px;">
     <div class="form-container" style="height: auto; margin: 50px auto 0px auto;" 
         method="POST" action="/feed/read/{{feed.id}}/" enctype="multipart/form-data">
-
+        <a href="/feed/{{feed.author_id}}/" style="text-decoration: none; color: darkblue; font-weight: bold;">
+            {{feed.author}}님
+        </a>
         <div class="form" method="POST" action="/feed/read/{{feed.id}}/" enctype="multipart/form-data">
             <span class="heading" style="color: rgb(0, 0, 0); font-weight: 500;">제목</span>
             <p class="input__field input__field--textarea" style="height: 10px;" id="title" name="title">
