@@ -2,9 +2,12 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 from .models import UserModel
 from feed.models import Feed
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+
+from PIL import Image
 
 # Create your views here.
 
@@ -38,6 +41,8 @@ def signup(request):
         email = request.POST['email']
         password = request.POST['password']
         image = request.FILES.get('image')
+        if not image:
+            image = f'{settings.MEDIA_ROOT}/default.png'
         UserModel.objects.create_user(
             username=username, nickname=nickname, email=email, password=password, image=image)
         return redirect('/login/')
