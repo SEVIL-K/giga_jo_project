@@ -29,6 +29,7 @@
             <form action="/feed/delete/{{feed.id}}/" method="post" class="d-inline">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-primary mt-3">삭제하기</button>
+
             </form>
             {% endif %}
             <a href="/feedlist/" class="btn btn-primary mt-3">뒤돌아가기</a>
