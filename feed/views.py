@@ -2,8 +2,11 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
+from user.models import UserModel
 from .models import Feed
+
 
 
 def index(request):
@@ -87,3 +90,29 @@ def create_comment(request, feed_id):
         return redirect("/feed/read/{}/", feed_id=feed_id)
     else:
         return HttpResponse("잘못된 요청")
+
+
+def authorsfeed(request, author_id):
+    if request.method == "GET":
+        author = UserModel.objects.get(id=author_id)
+        feeds = Feed.objects.filter(author_id=author_id)
+        # feeds = author.feed_set.all()
+
+        page = request.GET.get('page')
+        paginator = Paginator(feeds, 6)
+
+        try:
+            page_obj = paginator.page(page)
+        except PageNotAnInteger:
+            page = 1
+            page_obj = paginator.page(page)
+        except EmptyPage:
+            page = paginator.num_pages
+            page_obj = paginator.page(page)
+
+        context = {
+            'author':author, 'feeds':feeds, 'page_obj':page_obj, 'paginator':paginator
+        }
+        return render(request, "feed/authorsfeed.html", context)
+    else:
+        return HttpResponse("Invalid request method", status=405)

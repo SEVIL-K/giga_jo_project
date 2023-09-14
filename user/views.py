@@ -37,8 +37,9 @@ def signup(request):
         nickname = request.POST['nickname']
         email = request.POST['email']
         password = request.POST['password']
+        image = request.FILES.get('image')
         UserModel.objects.create_user(
-            username=username, nickname=nickname, email=email, password=password)
+            username=username, nickname=nickname, email=email, password=password, image=image)
         return redirect('/login/')
     elif request.method == 'GET':
         return render(request, 'user/signup.html')
@@ -67,7 +68,7 @@ def logout(request):
     user = request.user
     if user.is_authenticated:
         auth_logout(request)
-        return redirect('/feedlist/')
+        return redirect('/login/')
     else:
         return HttpResponse('Invalid request method', status=405)
 
