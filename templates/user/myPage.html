@@ -23,9 +23,9 @@
         <h2 style="margin-left: -130px;">EDIT PROFILE</h2>
         <hr style="margin-left: -20px; width: 45px; height: 10px; background-color: rgb(4, 0, 0);">
         <div>
-            <form action="/mypage/update{{ user.id }}" method="post" enctype="multipart/form-data">
+            <form action="/mypage/update/{{ user.id }}" method="post" enctype="multipart/form-data">
                 <div class="wave-group" style="margin-top: 20px; margin-left: -20px;">
-                    <input required="" type="text" class="input">
+                    <input required="" type="text" class="input" id="username" name="username">
                     <span class="bar"></span>
                     <label for="username" class="label">
                       <span class="label-char" style="--index: 0">아</span>
@@ -34,7 +34,7 @@
                     </label>
                 </div>
                 <div class="wave-group" style="margin-top: 20px; margin-left: -20px;">
-                    <input required="" type="text" class="input">
+                    <input required="" type="text" class="input" id="nickname" name="nickname">
                     <span class="bar"></span>
                     <label for="nickname" class="label">
                       <span class="label-char" style="--index: 0">닉</span>
@@ -43,7 +43,7 @@
                     </label>
                 </div>
                 <div class="wave-group" style="margin-top: 20px; margin-left: -20px;">
-                    <input required="" type="text" class="input">
+                    <input required="" type="text" class="input" id="email" name="email">
                     <span class="bar"></span>
                     <label for="email" class="label">
                       <span class="label-char" style="--index: 0">이</span>
@@ -52,7 +52,7 @@
                     </label>
                 </div>
                 <div class="wave-group" style="margin-top: 20px; margin-left: -20px;">
-                    <input required="" type="password" class="input">
+                    <input required="" type="password" class="input" id="password1" name="password1">
                     <span class="bar"></span>
                     <label for="password1" class="label">
                       <span class="label-char" style="--index: 0">비</span>
@@ -62,7 +62,7 @@
                     </label>
                 </div>
                 <div class="wave-group" style="margin-top: 20px; margin-left: -20px;">
-                    <input required="" type="password" class="input">
+                    <input required="" type="password" class="input" id="password2" name="password2">
                     <span class="bar"></span>
                     <label for="password2" class="label">
                       <span class="label-char" style="--index: 0">비</span>
@@ -76,7 +76,7 @@
                     </label>
                 </div>
                 <div class="wave-group" style="margin-top: 20px; margin-left: -20px;">
-                    <input required="" type="file" class="input">
+                    <input required="" type="file" class="input" id="image" name="image">
                     <span class="bar"></span>
                     <label for="image" class="label">
                     </label>

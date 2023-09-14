@@ -42,7 +42,7 @@ def signup(request):
         password = request.POST['password']
         image = request.FILES.get('image')
         if not image:
-            image = f'{settings.MEDIA_ROOT}/default.png'
+            image = 'default.png'
         UserModel.objects.create_user(
             username=username, nickname=nickname, email=email, password=password, image=image)
         return redirect('/login/')
@@ -113,24 +113,27 @@ def update_profile(request, id):
     if request.method == 'GET':
         return render(request, template_name='user/myPage.html', context={'profile': me})
     elif request.method == 'POST':
-        re_add = reverse(viewname='update-profile', args=(id))
+        re_add = reverse(viewname='update-profile', args=(id,))
 
-        username = request.POST['username']
-        nickname = request.POST['nickname']
-        password1 = request.POST['password1']
-        password2 = request.POST['password2']
-        try:
-            image = request.FILE['image']
-        except:
-            image = None
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        nickname = request.POST.get('nickname')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        image = request.FILES.get('image')
+        if not image:
+            image = 'default.png'
         if password1 != password2:
             return render(request, template_name='user/myPage.html', context={'error': '비밀번호가 다릅니다!'})
         else:
+            # print(f"{username}, {nickname}, {email}, {password1}")
             me.username = username
             me.nickname = nickname
+            me.email = email
             me.set_password(password1)
             me.image = image
             me.save()
+            auth_login(request, me)
             return redirect(re_add)
 
 

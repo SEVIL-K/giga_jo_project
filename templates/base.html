@@ -744,11 +744,11 @@
 
                 <!-- Navbar dropdown -->
                 {% if user.is_authenticated %}
-                <li class="nav-item dropdown" style="float: right;">
+                <li class="nav-item dropdown" style="float: right; list-style: none;">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         {% if user.image %}
-                        <img src="{{ user.image.url }}" class="rounded-circle img-fluid" height='25' width='25'>
+                        <img src="{{ user.image.url }}" class="rounded-circle " height='25' width='25'>
                         {% endif %}
                     </a>
                     <!-- Dropdown menu -->

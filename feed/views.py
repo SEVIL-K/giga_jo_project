@@ -167,7 +167,7 @@ def delete_comment(request, comment_id):
 def feed_like(request, id):
     re_address = reverse('read', args=(id,))
     current_feed = Feed.objects.get(id=id)
-    user = UserModel.objects.get(id=current_feed.author_id)
+    user = request.user
     if current_feed.like < 0:
         current_feed.like = 0
         current_feed.save()
