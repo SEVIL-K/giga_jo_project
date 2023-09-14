@@ -9,9 +9,21 @@ from feed.models import Feed
 
 def feedlist(request):
     if request.method == "GET":
-        feeds = Feed.objects.all().order_by('-created_at')
-        page = request.GET.get('page')
 
+        # sort를 위한 코드
+        sort = request.GET.get('sort', '')
+        if sort == 'old':
+            feeds = Feed.objects.all().order_by('created_at')
+        # 좋아요 수, 댓글 수 정렬기능 아래와 같이 추가 가능
+        # elif sort == 'likes':
+        #     feeds = Feed.objects.all().order_by('-like_count', '-created_at')
+        # elif sort == 'comments':
+        #     feeds = Feed.objects.all().order_by('-comment_count', '-created_at')
+        else:
+            feeds = Feed.objects.all().order_by('-created_at')
+
+        # pagination을 위한 코드
+        page = request.GET.get('page')
         paginator = Paginator(feeds, 6)
 
         try:
@@ -38,7 +50,8 @@ def feedlist(request):
             "feeds": feeds,
             "page_obj": page_obj,
             "paginator": paginator,
-            "custom_range": custom_range
+            "custom_range": custom_range,
+            "sort": sort,
         }
         return render(request, 'feedlist/feedlist.html', context)
     else:
