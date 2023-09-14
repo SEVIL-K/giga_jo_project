@@ -76,11 +76,16 @@
                     </label>
                 </div>
                 <div class="wave-group" style="margin-top: 20px; margin-left: -20px;">
-                    <input required="" type="file" class="input" id="image" name="image">
+                    <input type="file" class="input" id="image" name="image">
                     <span class="bar"></span>
                     <label for="image" class="label">
                     </label>
                 </div>
+                {% if error %}
+                    <div class="alert alert-danger" role="alert" style="margin-top: 10px;">
+                    {{ error }}
+                    </div>
+                {% endif %}
                 <div class="button-borders" style="margin-top: 25px; margin-left: -17px; margin-bottom: 100px;">
                     <button type="submit" class="primary-button"> 확인
                     </button>
