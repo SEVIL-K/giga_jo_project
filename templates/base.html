@@ -740,39 +740,31 @@
                 </ul>
                 <!-- Left links -->
 
-                <!-- Search form -->
-                <form class="d-flex input-group w-auto">
-                    <input type="search" class="form-control" placeholder="사용자 검색" aria-label="Search" />
-                    <button class="btn btn-outline-primary" type="button" data-mdb-ripple-color="dark"
-                        style="padding: .45rem 1.5rem .35rem;">
-                        Search
-                    </button>
-                </form>
-                <ul class="navbar-nav mb-2 mb-lg-0">
 
-                    <!-- Navbar dropdown -->
-                    {% if user.is_authenticated %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            {% if user.image %}
-                            <img src="{{ user.image.url }}" class="rounded-circle img-fluid" height='25' width='25'>
-                            {% endif %}
-                        </a>
-                        <!-- Dropdown menu -->
-                        <ul class="dropdown-menu dropdown-menu-end p-1" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/mypage/{{ user.id }}">마이페이지</a></li>
-                            <li>
-                                <hr class="dropdown-divider" />
-                            </li>
-                            <li><a class="dropdown-item" method="post" href="/logout/">Log Out</a></li>
-                            <li>
-                                <hr class="dropdown-divider" />
-                            </li>
-                            <li><a class="dropdown-item" method="get" href="/user/">User List</a></li>
-                        </ul>
-                    </li>
-                    {% endif %}
+
+                <!-- Navbar dropdown -->
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        {% if user.image %}
+                        <img src="{{ user.image.url }}" class="rounded-circle img-fluid" height='25' width='25'>
+                        {% endif %}
+                    </a>
+                    <!-- Dropdown menu -->
+                    <ul class="dropdown-menu dropdown-menu-end p-1" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/mypage/{{ user.id }}">마이페이지</a></li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li><a class="dropdown-item" method="post" href="/logout/">Log Out</a></li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li><a class="dropdown-item" method="get" href="/user/">User List</a></li>
+                    </ul>
+                </li>
+                {% endif %}
                 </ul>
 
             </div>
