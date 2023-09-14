@@ -11,19 +11,6 @@ from PIL import Image
 
 # Create your views here.
 
-def home(request):
-    user = request.user
-    if user.is_authenticated:
-        return redirect('feed/index')
-    else:
-        return redirect('/login')
-
-def home(request):
-    user = request.user
-    if user.is_authenticated:
-        return redirect('feed/index')
-    else:
-        return redirect('/login')
 
 
 def home(request):
@@ -61,12 +48,11 @@ def login(request):
             auth_login(request, user)
             return redirect('/feedlist/')
         else:
-            return HttpResponse('Invalid auth', status=401)
+            return redirect('/login/')
     elif request.method == 'GET':
         return render(request, 'user/login.html')
     else:
-        return HttpResponse('Invalid request method', status=405)
-
+        return redirect('/login/')
 
 @login_required(login_url='/login/')
 def logout(request):
