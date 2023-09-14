@@ -15,6 +15,7 @@ class Feed(models.Model):
     image = models.ImageField(upload_to='', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    like = models.IntegerField(default=0)
 
 
 class FeedComment(models.Model):
