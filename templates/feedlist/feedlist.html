@@ -75,39 +75,68 @@
     {% endfor %}
 </div>
 
-<!-- paginator 1페이지만 있을 때 숨기기 -->
-{% if page_obj.has_other_pages %}
-<ul style="display:flex;list-style: none;">
 
-    <!-- paginator 이전 페이지 구현 -->
-    {% if page_obj.has_previous %}
-    <li style="margin:3px;">
-        <a style="text-decoration:none; color: blue;" href="?page={{page_obj.previous_page_number}}">&#10094;
-            Prev</a>
-    </li>
+<!-- sort 값을 보내주기 위한 form태그 -->
+<form id="searchForm" method="get" action="{% url 'feedlist' %}">
+  <div class="paginator_container" style="text-align: center; margin-left: 150px;">
+    <!-- paginator 1페이지만 있을 때 숨기기 -->
+    {% if page_obj.has_other_pages %}
+    <ul style="display:flex;list-style: none; display: inline-flex;">
+
+      <!-- paginator 이전 페이지 구현 -->
+      {% if page_obj.has_previous %}
+      <li style="margin:3px;">
+        <a style="text-decoration:none; font-size: 2rem; color: #333;"
+          href="?page={{page_obj.previous_page_number}}&sort={{ sort }}">&#10094;&#10094;
+          Prev</a>
+      </li>
+      {% endif %}
+
+      <!-- paginator 페이지 숫자 보여주기 -->
+      {% for page in custom_range %}
+      <!-- paginator 현재 페이지 강조하기 -->
+      {% if page == page_obj.number %}
+      <li style="margin:3px">
+        <a style="text-decoration: none; font-size: 2rem; color: #1f975d; text-decoration: underline;"
+          href="?page={{ page }}&sort={{ sort }}">{{ page }}</a>
+      </li>
+      {% else %}
+      <li style="margin:3px">
+        <a style="text-decoration: none; font-size: 2rem; color: #333;" href="?page={{ page }}&sort={{ sort }}">
+          {{ page }}</a>
+      </li>
+      {% endif %}
+      {% endfor %}
+
+      <!-- paginator 다음 페이지 구현 -->
+      {% if page_obj.has_next %}
+      <li style="margin:3px;">
+        <a style="text-decoration:none; font-size: 2rem; color: #333;"
+          href="?page={{page_obj.next_page_number}}&sort={{ sort }}">&#10095;&#10095;
+          Next</a>
+      </li>
+      {% endif %}
+    </ul>
+
     {% endif %}
 
-    <!-- paginator 페이지 숫자 보여주기 -->
-    {% for page in custom_range %}
-    <!-- paginator 현재 페이지 강조하기 -->
-    {% if page == page_obj.number %}
-    <li style="margin:3px">
-        <a style="text-decoration: none; color: red;" href="?page={{ page }}">{{ page }}</a>
-    </li>
-    {% else %}
-    <li style="margin:3px">
-        <a style="text-decoration: none; color: blue;" href="?page={{ page }}">{{ page }}</a>
-    </li>
-    {% endif %}
-    {% endfor %}
 
-    <!-- paginator 다음 페이지 구현 -->
-    {% if page_obj.has_next %}
-    <li style="margin:3px;">
-        <a style="text-decoration:none; color: blue;" href="?page={{page_obj.next_page_number}}">&#10095;
-            Next</a>
-    </li>
-    {% endif %}
-</ul>
-{% endif %}
+    <!-- dropup 메뉴로 정렬 버튼 만들기 -->
+    <div class="dropup" style="float: right; margin-top: 5px;margin-right: 100px;">
+      <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">정렬
+        <span class="caret"></span></button>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+        <li role="presentation" id="recently_sort" value=""><a role="menuitem" tabindex="-1" href="?page={{ page }}">최신
+            순</a></li>
+        <li role="presentation" id="old_sort" value="old"><a role="menuitem" tabindex="-1"
+            href="?page={{ page }}&sort=old">오래된
+            순</a></li>
+        <li role="presentation" class="divider"></li>
+        <li role="presentation" value=""><a role="menuitem" tabindex="-1" href="?page={{ page }}">초기화</a></li>
+      </ul>
+    </div>
+  </div>
+</form>
+
+
 {% endblock %}
