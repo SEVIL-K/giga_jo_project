@@ -23,81 +23,83 @@
             <p class="input__field input__field--textarea" style="height: 10px;" id="created_at" name="created_at">
                 {{feed.updated_at}}</p>
         </div>
-        {% if request.user == feed.author %}
-        <div>
-            
-            <a href="/feed/update/{{feed.id}}/">
-                <button type="submit" class="btn btn-primary mt-3">수정하기</button></a>
-                <form action="/feed/delete/{{feed.id}}/" method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-primary mt-3">삭제하기</button>
-                </form>
-            
+        <div style="padding-bottom: 10px; " align="right">
+            {% if user.is_authenticated and user == feed.author %}
+            <a href="/feed/update/{{feed.id}}/" class="btn btn-primary mt-3">수정하기</a>
+            <form action="/feed/delete/{{feed.id}}/" method="post" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary mt-3">삭제하기</button>
+            </form>
+            {% endif %}
+            <a href="/feedlist/" class="btn btn-primary mt-3">뒤돌아가기</a>
         </div>
-        {% endif %}
-        <a href="/feedlist/">
-            <button type="submit" class="btn btn-primary mt-3">뒤돌아가기</button>
-        </a>
-        <!-- <form method="POST" action="/feed/read/{{ feed.id }}/" enctype="multipart/form-data"> -->
-        <!-- <form method="POST" action="{% url 'create_comment' feed_id=feed.id %}">
-            {% csrf_token %}
-            <div class="modal__body">
-                <div class="input">
-                    <label class="input__label" style="font-size: larger;">댓글</label>
-                    <input class="input__field" type="text" id="content" name="content">
-                </div>
-                <div class="tt-area-write">
-                    <div class="tt-box-thumb">
-                        <span class="tt-thumbnail"
-                            style="background-image: url(&quot;https://img1.daumcdn.net/thumb/C88x88/?fname=https%3A%2F%2Ft1.daumcdn.net%2Ftistory_admin%2Fstatic%2Fmanage%2Fimages%2Fr3%2Fdefault_S.png&quot;);"></span>
-                    </div>
-                    <div class="tt-box-write" style="display: flex; justify-content: flex-end;">
-                        <label class="tt-xe-label"><input type="checkbox" name="secret" id="secret"><span
-                                class="tt_img_area_reply tt-xe-input-helper"></span><span
-                                class="tt-xe-label-text">비밀글</span></label><button type="submit"
-                            class="tt-btn_register">등록</button>
-                    </div>
-                    
-                </div>
-                
-            </div>
-           
-        </form> -->
+        
         <form method="post" action="{% url 'create_comment' feed.id %}" class="mb-4">
+            <span class="heading" style="color: rgb(0, 0, 0); font-weight: 500;">댓글</span>
             {% csrf_token %}
             <textarea class="form-control" name="content" rows="3" placeholder="여기에 댓글 작성해주세요"></textarea>
-            <button type="submit" class="btn btn-primary mt-3">댓글 작성</button>
+            
+            <button type="submit" class="btn btn-primary mt-3" >댓글 작성</button>
         </form>
         
-
-    <div class="card bg-light">
-        <div class="card-body">
-            <!-- Comment form -->
+        <div class="card bg-light">
             
-            <!-- Comment with nested comments -->
-            <div class="comment-list">
-                {% for comment in comments %}
-                <div class="mb-4" id="comment-{{ comment.pk }}">
-                    <div class="media">
-                        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                        <div class="media-body">
-                            <!-- 작성자 이름과 날짜 -->
-                            <h5 class="mt-0">{{ comment.author.username }}님 &nbsp;&nbsp;<small class="text-muted">{{ comment.created_at }}</small></h5>
-                            <!-- 댓글 내용 -->
-                            <p>{{ comment.content | linebreaks }}</p>
+            <div class="card-body">
+                
+                <!-- Comment form -->
+                <!-- Comment with nested comments -->
+                <div class="comment-list">
+                    {% for comment in comments %}
+                    <div class="mb-4 comment-box" id="comment-{{ comment.pk }}" >
+                        <div class="media" style="border: 1px solid #ccc; display:flex;" >
+                            <div style="border-right: 1px solid #ccc;">
+                                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                            </div>
+                            <div class="media-body "style="border-right: 1px solid #ccc; flex-grow: 1;">
+                                <!-- 작성자 이름과 날짜 -->
+                                <h5 class="mt-0">{{ comment.author.username }}님 &nbsp;&nbsp;<small class="text-muted">{{ comment.created_at }}</small></h5>
+                                <!-- 댓글 내용 -->
+                                <p>{{ comment.content | linebreaks }}</p>
+                            </div>
+                                <!-- 댓글 수정 버튼: 로그인한 사용자와 댓글 작성자가 일치할 때만 보이게 -->
+                                {% if user.is_authenticated and comment.author == user %}
+                                <div class="float-right">
+                                    <a role="button"
+                                        class="btn btn-sm btn-info btn-update"
+                                        id="comment-{{ comment.pk }}-update-btn"
+                                        href="/feed/update_comment/{{ comment.pk }}/">
+                                        수정
+                                    </a>
+                                    <div style="margin-top: 20px;">
+                                    <a role="button"
+                                        class="btn btn-sm btn-info btn-delete"
+                                        id="comment-{{ comment.pk }}-delete-btn"
+                                        href="/feed/delete_comment/{{ comment.pk }}/">
+                                        삭제
+                                    </a>
+                                </div>
+                                </div>
+                                {% endif %}
+                            
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
-                {% empty %}
-                <p>댓글이 없습니다.</p>
-                {% endfor %}
             </div>
         </div>
-    </div>
+        
+        
+    </div> 
+        
 
-</div>
 
 
 
-{% endblock %}
 
+
+
+
+
+
+
+    {% endblock %}

@@ -27,7 +27,7 @@
   <body>
     <div class="container">
       <h3>회원가입</h3>
-      <form action="/signup/" method="post">
+      <form action="/signup/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="input-group">
           <span class="input-group-addon"
@@ -69,6 +69,7 @@
             name="email"
             placeholder="이메일" />
         </div>
+        <input type="file" name="image" />
         <br />
         <div class="btn-signup">
           <a class="btn btn-default" href="/login/">로그인 </a>
