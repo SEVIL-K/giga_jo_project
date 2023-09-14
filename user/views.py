@@ -132,3 +132,20 @@ def update_profile(request, id):
             me.image = image
             me.save()
             return redirect(re_add)
+
+
+@login_required(login_url='/login/')
+def user_view(request):
+    user_list = UserModel.objects.all().exclude(username=request.user.username)
+    return render(request, 'user/follow.html', {'user_list': user_list})
+
+
+@login_required(login_url='/login/')
+def user_follow(request, id):
+    me = request.user
+    click_user = UserModel.objects.get(id=id)
+    if me in click_user.followee.all():
+        click_user.followee.remove(me)
+    else:
+        click_user.followee.add(me)
+    return redirect('/user')

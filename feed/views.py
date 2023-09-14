@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, reverse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -160,3 +160,23 @@ def delete_comment(request, comment_id):
             return HttpResponse("권한없음!")
     # else:
     #     return HttpResponse("잘못적음!")
+
+def feed_like(request, id):
+    re_address = reverse('read', args=(id,))
+    current_feed = Feed.objects.get(id=id)
+    user = UserModel.objects.get(id=current_feed.author_id)
+    if current_feed.like < 0:
+        current_feed.like = 0
+        current_feed.save()
+
+    if current_feed not in user.liked_feed.all():
+        user.liked_feed.add(current_feed)
+        current_feed.like += 1
+        current_feed.save()
+    else:
+        user.liked_feed.remove(current_feed)
+        current_feed.like -= 1
+        current_feed.save()
+    print(current_feed.like)
+
+    return redirect(re_address)
