@@ -10,7 +10,7 @@
     <h3 style="text-align: center; margin-top: 3.2px; letter-spacing : 0.5em;">{{ user.nickname }}'s FEED</h3>
 </div>
 <div style="text-align: center;">
-    <div style="margin: 30px 0px 0px 0px; display: inline-flex; flex-wrap: wrap; justify-content: center; width: 1000px;">
+    <div style="margin: 30px 0px 0px 0px; display: inline-flex; flex-wrap: wrap; justify-content: flex-start; width: 1000px; padding: 14px;">
         {% for feed in page_obj %}
             <!-- <a href="/feeds/{{ feed.id }}/">
                 <p>{{feed.title}}</p>
