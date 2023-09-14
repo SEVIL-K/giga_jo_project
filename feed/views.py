@@ -40,10 +40,13 @@ def create(request):
 
 def read(request, feed_id):
     feed = Feed.objects.get(id=feed_id)
+    comments = FeedComment.objects.filter(feed=feed)
     context = {
-        "feed": feed
+        "feed": feed,
+        "comments": comments
     }
     return render(request, "feed/detail.html", context, )
+
 
 
 @csrf_exempt
@@ -80,23 +83,35 @@ def update(request, feed_id):
 
 
 # 댓글기능 구현중
-@csrf_exempt
+@login_required
 def create_comment(request, feed_id):
     if request.method == "POST":
         content = request.POST.get("content")
         author = request.user
-        FeedComment.objects.create(content=content,
-                                   author=author, feed_id=feed_id)
-        return redirect("/feed/read/{}/", feed_id=feed_id)
-    elif request.method == "GET":
-        return render(request, "feed/create.html")
+        feed = Feed.objects.get(id=feed_id)
+        comment = FeedComment.objects.create(content=content, author=author, feed=feed)
+        # comment = FeedComment(content=content, author=author)
+        # comment.save()
+        # 댓글 생성 후 리디렉션 또는 다른 작업 수행
+        return redirect("/feed/read/{feed_id}/".format(feed_id=feed_id))  # 피드 상세 페이지로 리디렉션
     else:
-        return HttpResponse("잘못적음!")
+        return HttpResponse("잘못된 요청입니다.")
+# def create_comment(request, feed_id):
+#     if request.method == "POST":
+#         content = request.POST.get("content")
+#         author = request.user
+#         feed = Feed.objects.get(pk=feed_id)
+#         comment = FeedComment.objects.create(content=content,
+#                                    author=author, feed_id=feed_id)
+#         return redirect("/feed/read/{feed_id}/", feed_id=feed_id)
+#     elif request.method == "GET":
+#         return render(request, "feed/create.html")
+#     else:
+#         return HttpResponse("잘못적음!")
 
 
-def read_comment(request, feed_id):
-    comments = FeedComment.objects.filter(feed_id=feed_id)
-    context = {
-        "comments": comments
-    }
-    return render(request, "feed/detail.html", context, )
+
+# def read_comment(request, feed_id):
+#     feed = Feed.objects.get(id=feed_id)
+#     comments = FeedComment.objects.filter(feed=feed, feed_id=feed_id)
+#     return render(request, "feed/detail.html", {"feed": feed, "comments": comments})
