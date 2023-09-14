@@ -1,24 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-
-    <h1>여기서 수정해주세요</h1>
-    <form action="/feed/update/{{feed.id}}/" method="post">
-        {%csrf_token%}
-        <h1>{{user.username}} 님이 작성하신 글</h1>
-        <!-- value를 넣는거는 수정하기때 내가 무엇을썻는지 나와야 하므로 -->
-        <p>제목</p><input type="text" name="title" id="title" value="{{feed.title}}">
-        <p>내용</p><input type="text" name="content" id="content" value="{{feed.content}}">
-        <button type="submit">제출</button>
-    </form>
-
-</body>
-
+{% extends 'base.html' %}
+{% block title %}피드 상세 페이지{% endblock %}
+{% block content %}
+<div style="height: 640px;">
+    <div class="form-container" style="height: 1050px; margin: 50px auto 0px auto;">
+        <form method="POST" action="/feed/update/{{feed.id}}/" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form">
+                <span class="heading" style="color: rgb(0, 0, 0); font-weight: 500;">제목</span>
+                <input placeholder="Title" id="title" name="title" type="text" class="input" value="{{feed.title}}">
+            </div>
+            <div class="form">
+                <span class="heading" style="color: rgb(0, 0, 0); font-weight: 500;">내용</span>
+                <input placeholder="Content" id="content" name="content" type="text" class="input" value="{{feed.content}}">
+            </div>
+            <div class="button-container">
+                <button class="send-button" type="submit">수정 완료</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
 </html>

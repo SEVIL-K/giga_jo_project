@@ -10,4 +10,6 @@ urlpatterns = [
     path('mypage/<int:id>', views.MyPage, name='myPage'),
     path('mypage/update/<int:id>', views.update_profile, name='update-profile'),
     path('myfeed/<int:id>', views.Myfeed, name='my-feed'),
+    path('user/', views.user_view, name='user-view'),
+    path('user/follow/<int:id>/', views.user_follow, name='follow'),
 ]

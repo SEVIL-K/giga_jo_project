@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}댓글 수정 페이지{% endblock %}
+{% block content %}
+<div style="height: 640px;">
+    <div class="form-container" style="height: 750px; margin: 50px auto 0px auto;">
+        <form method="POST" action="/feed/update_comment/{{ comment.id }}/" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form">
+                <span class="heading" style="color: rgb(0, 0, 0); font-weight: 500;">댓글 내용</span>
+                <input placeholder="Content" id="content" name="content" type="text" class="input" value="{{ comment.content }}">
+            </div>
+            <div class="button-container">
+                <button class="send-button" type="submit">수정 완료</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
