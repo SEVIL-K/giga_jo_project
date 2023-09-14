@@ -44,9 +44,9 @@
 {% endif %}
 
 <!-- 피드 카드 -->
-<div class="feed_crad_containor" style="text-align: center;">
+<div class="feed_crad_containor" style="margin-left: auto; margin-right: auto;">
   <div
-    style="margin: 200px 0px 50px 60px; display: inline-flex; flex-wrap: wrap; justify-content: flex-start; width: 1000px;">
+    style="margin: 200px 25% 50px 23%; display: inline-flex; flex-wrap: wrap; justify-content: flex-start; width: 1000px;">
     {% for feed in page_obj %}
     <div class="my_card" onclick="location.href='/feed/read/{{ feed.id }}'"
       style="border: solid; border-width: 0.7px; margin-top: 20px; margin-right: 21px; cursor: pointer;">
@@ -58,7 +58,7 @@
       <div style="display: flex; flex-direction: row;">
         {% if feed.author.image %}
         <div style="margin-left: 6px; margin-top: 7px;">
-          <img src="{{ feed.author.image.url }}" class="rounded-circle img-fluid" height='25' width='25'>
+          <img src="{{ feed.author.image.url }}" class="rounded-circle" height='25' width='25'>
         </div>
         {% endif %}
         <div class="author" style="margin-left: 10px; margin-top: 5px;">
