@@ -72,14 +72,14 @@ def update(request, feed_id):
         
         feed = Feed.objects.get(id=feed_id)
         # 사용자 인증 확인 부분 주석 처리
-        # if request.user == feed.author:
-        feed.title = request.POST.get("title")
-        feed.content = request.POST.get("content")
-        if request.FILES.get("image"):
-                new_image = request.FILES["image"]
-                feed.image = new_image  # 이미지 필드를 업데이트
-                feed.save()  # 새 이미지를 저장
-        return redirect("/feed/read/{}/".format(feed_id))
+        if request.user == feed.author:
+            feed.title = request.POST.get("title")
+            feed.content = request.POST.get("content")
+            if request.FILES.get("image"):
+                    new_image = request.FILES["image"]
+                    feed.image = new_image  # 이미지 필드를 업데이트
+            feed.save()  # 새 이미지를 저장
+            return redirect("/feed/read/{}/".format(feed_id))
     elif request.method == "GET":
         feed = Feed.objects.get(id=feed_id)
         context = {
