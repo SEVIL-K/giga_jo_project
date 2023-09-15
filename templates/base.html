@@ -721,19 +721,19 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left links -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
+                    <li class="nav-item" style="font-size: larger;">
                         <a class="nav-link active" aria-current="page" href="/feedlist/">Home</a>
                     </li>
                     {% if user.is_authenticated %}
-                    <li class="nav-item">
+                    <li class="nav-item" style="font-size: larger;">
                         <a class="nav-link active" aria-current="page" href="/myfeed/{{ user.id }}">나의 피드</a>
                     </li>
 
                     {% else %}
-                    <li class="nav-item">
+                    <li class="nav-item" style="font-size: larger;">
                         <a class="nav-link active" aria-current="page" href="/login/">로그인</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" style="font-size: larger;">
                         <a class="nav-link active" aria-current="page" href="/signup/">회원 가입</a>
                     </li>
                     {% endif %}
@@ -746,9 +746,9 @@
                 {% if user.is_authenticated %}
                 <li class="nav-item dropdown" style="float: right; list-style: none;">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
+                        data-bs-toggle="dropdown" aria-expanded="false" style="margin-top: 10px;">
                         {% if user.image %}
-                        <img src="{{ user.image.url }}" class="rounded-circle " height='25' width='25'>
+                        <img src="{{ user.image.url }}" class="rounded-circle " height='30' width='30'>
                         {% endif %}
                     </a>
                     <!-- Dropdown menu -->
